@@ -1,0 +1,110 @@
+Middlewares
+
+middlewares/
+  renderMW
+
+middlewares/auth/
+  authMW
+  checkLoginMW
+  handleWrongFormMW
+
+middlewares/kid/
+  getKidsMW
+  getKidMW
+  saveKidMW
+  delKidMW
+
+middlewares/application/
+  getApplicationsMW
+  getApplicationMW
+  saveApplicationMW
+  delApplicationMW
+
+middlewares/user/
+  getUsersMW
+  getUserMW
+  saveUserMW
+  delUserMW
+
+GET /?login-error=wrongpass v /?reg-error=usernametaken
+  handleWrongFormMW (checks get param - puts variable in template)
+  renderMW(index.html)
+
+POST /register        - success or error  
+  saveUserMW (checks reg data)
+
+POST /login           - password check: -> /kids or -> index.html
+  checkLoginMW (checks and session login)
+
+GET /kids
+  authMW (admin or user or redirect)
+  getKidsMW (checks for filter)
+  renderMW(kidslist.html v adminkidslist.html)
+
+GET /kids/details/:kidID
+  authMW (only user)
+  getKidMW
+  renderMW(kidsdetails.html)
+
+GET,POST /kids/new
+  authMW (only admin)
+  saveKidMW
+  renderMW(kidseditnew.html (new))
+
+GET,POST /kids/edit/:kidID
+  authMW (only admin)
+  getKidMW
+  saveKidMW
+  renderMW(kidseditnew.html (edit))
+
+GET /kids/del/:kidID
+  authMW (only admin)
+  getKidMW
+  delKidMW
+
+GET /applications
+  authMW (admin or user or redirect)
+  getApplicationsMW
+  renderMW(applications.html v adminapplications.html)
+
+POST /applications/new
+  authMW (only user)
+  saveApplicationMW (saves and redirects to kids)
+
+GET /applications/del/:appID
+  authMW (admin or user or redirect)
+  getApplicationMW
+  delApplicationMW
+
+POST /applications/edit/:appID
+  authMW (only admin)
+  getApplicationMW
+  saveApplicationMW (saves and redirect)
+
+GET,POST /profile
+  authMW (only user)
+  getUserMW
+  saveUserMW (edit)
+  renderMW(profile.html)
+
+GET /profile/del
+  authMW (only user)
+  getUserMW
+  delUserMW
+
+GET /users
+  authMW (only admin)
+  getUsersMW
+  renderMW(users.html)
+
+GET /users/:userID
+  authMW (only admin)
+  getUserMW
+  renderMW(usersdetails.html)
+
+GET /users/:userID/del (del)
+  authMW (only admin)
+  getUserMW
+  delUserMW
+
+

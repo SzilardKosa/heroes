@@ -1,0 +1,52 @@
+Kids and users
+
+- index.html - login form , register form
+[normal user]
+- kidslist.html - kid cards (view, apply, filter)
+- kidsdetails.html - kid details (apply)
+- applications.html - table (delete)
+- profile.html - user details (edit, delete)
+[admin user]
+- adminkidslist.html - kid cards (edit, delete, add, filter)
+- kidseditnew.html - kid details (edit, save, cancel)
+- adminapplications.html - table (edit(approve, denie), delete)
+- users.html - user cards (view, delete)
+- usersdetails.html - user details (delete)
+
+Routing
+
+GET /?error=wrongpass - index.html
+POST /register        - success or error
+POST /login           - password check: -> /kids or -> index.html
+
+[normal user]
+
+GET /kids             - kidslist.html    (filter)
+GET /kids/details/:kidID      - kidsdetails.html (view)
+POST /applications/new                   (apply)
+
+GET /applications     - applications.html
+GET /applications/del/:appID             (delete)
+
+GET /profile          - profile.html
+POST /profile/edit                    (edit)
+GET /profile/del                      (delete)
+
+[admin user]
+
+GET /kids             - adminkidslist.html (filter)
+GET /kids/new         - kidseditnew.html   (new)
+POST /kids/new
+
+GET /kids/edit/:kidID - kidseditnew.html   (edit)
+POST /kids/edit/:kidID
+GET /kids/del/:kidID                       (delete)
+
+GET /applications     - adminapplications.html
+POST /applications/edit/:appID  (edit)
+GET /applications/del/:appID    (delete)
+
+GET /users            - users.html
+GET /users/:userID    - usersdetails.html
+GET /users/:userID/del (del)
+
