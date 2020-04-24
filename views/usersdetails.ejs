@@ -1,0 +1,52 @@
+<%- include('partials/header') -%>
+<%- include('partials/adminnavbar') -%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h2>User Details</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Picture -->
+    <img class="col-md-6 img-fluid" src="<%= user.profile %>">
+    <!-- Kid info -->
+    <div class="col-md-6">
+      <div class="row">
+        <label class="col-sm-3"><strong>Name</strong></label>
+        <div class="col-sm-9">
+          <p><%= user.name %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Email</strong></label>
+        <div class="col-sm-9">
+          <p><%= user.email %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Phone</strong></label>
+        <div class="col-sm-9">
+          <p><%= user.phone %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Password</strong></label>
+        <div class="col-sm-9">
+          <p><%= user.password %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Universe</strong></label>
+        <div class="col-sm-9">
+          <p><%= user.universe %></p>
+        </div>
+      </div>
+      <a href="/users" class="btn btn-danger">Delete</a>
+
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') -%>

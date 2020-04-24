@@ -1,0 +1,35 @@
+<%- include('partials/header') -%>
+<%- include('partials/adminnavbar', {active: "Kids"}) -%>
+
+<div class="container">
+  <!-- Filter -->
+  <%- include('partials/filter') -%>
+  <!-- Kid cards -->
+  <div class="row">
+
+    <% kids.forEach(kid => { %>
+      <div class="col-6 col-md-4 col-lg-3 mt-2">
+        <div class="card">
+          <img class="card-img-top" src="<%= kid.profile %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= kid.name %> </h5>
+            <p class="card-text">ID: <%= kid._id %> </p>
+            <p class="card-text">Universe: <%= kid.universe %> </p>
+            <p class="card-text">Status: <%= kid.status %> </p>
+            <a href="/kids/edit/<%= kid._id %>" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+    
+    <div class="col-6 col-md-4 col-lg-3 text-center mt-4">
+      <a href="/kids/new" class="btn btn-primary btn-circle btn-xl">
+        <i class="fas fa-plus"style="vertical-align: middle"></i>
+      </a>
+    </div>
+    
+  </div>
+</div>
+
+<%- include('partials/footer') -%>

@@ -15,6 +15,8 @@ const getUserMW = require('../middlewares/user/getUserMW');
 const saveUserMW = require('../middlewares/user/saveUserMW');
 const delUserMW = require('../middlewares/user/delUserMW');
 
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 module.exports = function (app) {
   const objRepo = {};
@@ -37,11 +39,13 @@ module.exports = function (app) {
       renderMW(objRepo, 'kidsdetails'));
   app.use('/kids/new',
       authMW(objRepo, 'admin'),
+      upload.single('profile'),
       saveKidMW(objRepo),
       renderMW(objRepo, 'kidseditnew'));
   app.use('/kids/edit/:kidID',
       authMW(objRepo, 'admin'),
       getKidMW(objRepo),
+      upload.single('profile'),
       saveKidMW(objRepo),
       renderMW(objRepo, 'kidseditnew'));
   app.get('/kids/del/:kidID',
@@ -69,6 +73,7 @@ module.exports = function (app) {
   app.use('/profile',
       authMW(objRepo, 'user'),
       getUserMW(objRepo),
+      upload.single('profile'),
       saveUserMW(objRepo),
       renderMW(objRepo, 'profile'));
   app.get('/profile/del',

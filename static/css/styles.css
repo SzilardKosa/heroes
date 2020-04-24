@@ -1,0 +1,8 @@
+/* Circle button */
+.btn-circle.btn-xl {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  font-size: 3rem;
+  text-align: center;
+}

@@ -1,0 +1,77 @@
+<%- include('partials/header') -%>
+
+<div class="container text-center">
+  <h1>Get back that kiddo!</h1>
+  <p class="lead text-muted">Text about the importance of this webpage. Text about the importance of this webpage. Text about the importance of this webpage. Text about the importance of this webpage. </p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <!-- Log In -->
+    <div class="col-md-5">
+      <h2>Log in</h2>
+      <form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password">
+        </div>
+        <a class="btn btn-primary" href="/kids">Log in</a>
+      </form>
+    </div>
+    <!-- Register -->
+    <div class="col-md-7">
+        <h2>Create an account</h2>
+        <form>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+              <div class="form-group">
+                <label for="emailReg">Email</label>
+                <input type="text" class="form-control" id="emailReg">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone">
+              </div>
+              <div class="form-group">
+                <label for="passwordReg">Password</label>
+                <input type="password" class="form-control" id="passwordReg">
+              </div>
+              <div class="form-group">
+                <label for="passwordReg2">Confirm Password</label>
+                <input type="password" class="form-control" id="passwordReg2">
+              </div>
+              <div class="form-group">
+                <label class="mr-4">Universe</label>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="DC">
+                  <label class="form-check-label" for="inlineRadio1">DC</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Marvel">
+                  <label class="form-check-label" for="inlineRadio2">Marvel</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+                <!-- Add picture -->
+                <div class="form-group">
+                  <img class="img-thumbnail" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                  <input type="file" class="form-control-file border">
+                </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-2">Register</button>
+        </form>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') -%>

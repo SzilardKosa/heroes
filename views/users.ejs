@@ -1,0 +1,31 @@
+<%- include('partials/header') -%>
+<%- include('partials/adminnavbar', {active: "Users"}) -%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h2>Users</h2>
+    </div>
+  </div>
+  <!-- User cards -->
+  <div class="row">
+    
+    <% users.forEach(user => { %>
+      <div class="col-6 col-md-4 col-lg-3 mt-2">
+        <div class="card">
+          <img class="card-img-top" src="<%= user.profile %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= user.name %></h5>
+            <p class="card-text">ID: <%= user._id %></p>
+            <p class="card-text">Universe: <%= user.universe %> </p>
+            <a href="/users/<%= user._id %>" class="btn btn-primary">View</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+    
+  </div>
+</div>
+
+<%- include('partials/footer') -%>

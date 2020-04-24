@@ -7,6 +7,11 @@ const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        next();
+        if (typeof req.body.name === 'undefined'){
+            return next();
+        }
+        console.log(req.body.name);
+        console.log(req.file);
+        res.redirect('/kids');
     };
 };

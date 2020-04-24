@@ -1,0 +1,58 @@
+<%- include('partials/header') -%>
+<%- include('partials/navbar') -%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h2>Kid Details</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Picture -->
+    <img class="col-md-6 img-fluid" src="<%= kid.profile %>">
+    <!-- Kid info -->
+    <div class="col-md-6">
+      <div class="row">
+        <label class="col-sm-3"><strong>Name</strong></label>
+        <div class="col-sm-9">
+          <p><%= kid.name %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Age</strong></label>
+        <div class="col-sm-9">
+          <p><%= kid.age %> years old</p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Gender</strong></label>
+        <div class="col-sm-9">
+          <p><%= kid.gender %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Universe</strong></label>
+        <div class="col-sm-9">
+          <p><%= kid.universe %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Abilities</strong></label>
+        <div class="col-sm-9">
+          <p><%= kid.abilities %></p>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-3"><strong>Status</strong></label>
+        <div class="col-sm-9">
+          <p><%= kid.status %></p>
+        </div>
+      </div>
+      <a href="/kids" class="btn btn-danger">Apply</a>
+
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') -%>

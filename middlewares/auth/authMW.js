@@ -9,6 +9,8 @@ const requireOption = require('../requireOption');
 module.exports = function (objectrepository, acceptableAuthRoles) {
     return function (req, res, next) {
         console.log('acceptableAuthRoles: '+ acceptableAuthRoles);
+        if ( acceptableAuthRoles === "both")
+            res.locals.authRoles = "both";
         next();
     };
 };
