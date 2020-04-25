@@ -1,6 +1,7 @@
 const authMW = require('../middlewares/auth/authMW');
 const checkLoginMW = require('../middlewares/auth/checkLoginMW');
 const handleWrongFormMW = require('../middlewares/auth/handleWrongFormMW');
+const logoutMW = require('../middlewares/auth/logoutMW');
 const renderMW = require('../middlewares/renderMW');
 const getKidsMW = require('../middlewares/kid/getKidsMW');
 const getKidMW = require('../middlewares/kid/getKidMW');
@@ -15,11 +16,19 @@ const getUserMW = require('../middlewares/user/getUserMW');
 const saveUserMW = require('../middlewares/user/saveUserMW');
 const delUserMW = require('../middlewares/user/delUserMW');
 
+const KidModel = require('../models/kid');
+const UserModel = require('../models/user');
+const ApplicationModel = require('../models/application');
+
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
-module.exports = function (app) {
-  const objRepo = {};
+module.exports = function (app, rootDir) {
+  const objRepo = {
+      KidModel: KidModel,
+      UserModel: UserModel,
+      ApplicationModel: ApplicationModel
+  };
 
   app.get('/',
       handleWrongFormMW(objRepo),
@@ -28,6 +37,17 @@ module.exports = function (app) {
       saveUserMW(objRepo));
   app.post('/login',
       checkLoginMW(objRepo));
+  app.use('/logout',
+      logoutMW(objRepo));
+
+  app.use('/images/:id',
+        function(req, res, next){
+            res.sendFile(`${rootDir}/uploads/${req.params.id}`, {
+                headers: {
+                    'content-type':'image/png'
+                }
+            });
+        });
   
   app.get('/kids',
       authMW(objRepo, 'both'),

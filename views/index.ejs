@@ -10,16 +10,19 @@
     <!-- Log In -->
     <div class="col-md-5">
       <h2>Log in</h2>
-      <form>
+      <% if (typeof loginError !== 'undefined') { %>
+        <div class="alert alert-danger"><%= loginError %></div>
+      <% } %>
+      <form method="POST" action="/login">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="text" class="form-control" id="email">
+          <input type="text" class="form-control" id="email" name="email">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password">
+          <input type="password" class="form-control" id="password" name="password">
         </div>
-        <a class="btn btn-primary" href="/kids">Log in</a>
+        <input type="submit" class="btn btn-primary" value="Log in" />
       </form>
     </div>
     <!-- Register -->

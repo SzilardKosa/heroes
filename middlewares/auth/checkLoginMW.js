@@ -6,6 +6,20 @@ const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        res.redirect('/kids');
+        if (typeof req.body.email === 'undefined'){
+            return res.redirect('/?login-error='+encodeURIComponent('Email is missing!'));
+        }
+
+        if (typeof req.body.password === 'undefined'){
+            return res.redirect('/?login-error='+encodeURIComponent('Password is missing!'));
+        }
+
+        if (req.body.email === 'admin' &&
+            req.body.password === 'admin'){
+            return res.redirect('/kids');
+        }
+
+        res.redirect('/?login-error='+encodeURIComponent('Wrong login data'));
+
     };
 };

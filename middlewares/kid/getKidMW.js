@@ -5,18 +5,17 @@
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
-    return function (req, res, next) {
-        res.locals.kid = {
-            _id: 'kidid1',
-            status: 'taken',
-            name: 'Emy Nonerealgirl',
-            age: '14',
-            gender: 'female',
-            universe: 'DC',
-            abilities: 'she can become invisible, but only when no one is looking at her',
-            profile:'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'
-        };
+    const KidModel = requireOption(objectrepository, 'KidModel');
 
-        next();
+    return function (req, res, next) {
+        KidModel.findOne({_id:req.params.kidID},
+            (err, kid) => {
+            if (err || !kid){
+                return next(err);
+            }
+
+            res.locals.kid = kid;
+            return next();
+        });
     };
 };

@@ -5,6 +5,9 @@ const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
     return function (req, res, next) {
+        if (typeof req.query['login-error'] !== 'undefined'){
+            res.locals.loginError = req.query['login-error']
+        }
         next();
     };
 };

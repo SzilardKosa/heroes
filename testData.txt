@@ -1,0 +1,85 @@
+res.locals.kids = [
+{
+    _id: 'kidid1',
+    status: 'taken',
+    name: 'Toby Nonerealboy',
+    age: '12',
+    gender: 'male',
+    universe: 'DC',
+    abilities: 'Communing with squirrels, Knowing the Bible by heart',
+    profile:'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'
+},
+{
+    _id: 'kidid2',
+    status: 'free',
+    name: 'Bruce Wayne',
+    age: '11',
+    gender: 'male',
+    universe: 'DC',
+    abilities: 'Afraid of bats, money',
+    profile:'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'
+},
+{
+    _id: 'kidid3',
+    status: 'taken',
+    name: 'Peter Benjamin Parker',
+    age: '14',
+    gender: 'male',
+    universe: 'Marvel',
+    abilities: 'Being young and irresponsible',
+    profile:'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'
+},
+{
+    _id: 'kidid4',
+    status: 'free',
+    name: 'Space baby',
+    age: '1',
+    gender: 'male',
+    universe: 'DC',
+    abilities: 'Supermanlike',
+    profile:'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'
+}
+]
+
+res.locals.kid = {
+    _id: 'kidid1',
+    status: 'taken',
+    name: 'Emy Nonerealgirl',
+    age: '14',
+    gender: 'female',
+    universe: 'DC',
+    abilities: 'she can become invisible, but only when no one is looking at her',
+    profile:'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'
+}
+
+// let testUser = new UserModel();
+// testUser.name = 'test';
+// testUser.email = 'test@email.com';
+// testUser.password = '1234';
+// testUser.phone = '+99 9999';
+// testUser.universe = 'DC';
+// testUser.profile = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
+// testUser.save((err)=>{
+//     console.log(err);
+
+//     let testKid = new KidModel();
+//     testKid.status = 'taken';
+//     testKid.name = 'test';
+//     testKid.age = 12;
+//     testKid.gender = 'female';
+//     testKid.universe = 'DC';
+//     testKid.abilities = 'ability';
+//     testKid.profile = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
+//     testKid.save((err)=>{
+//         console.log(err);
+    
+//         let testApplication = new ApplicationModel();
+//         testApplication.status = 'Approved';
+//         testApplication._kid = testKid;
+//         testApplication._user = testUser;
+//         testApplication.save((err)=>{
+//             console.log(err);
+//         })
+//     })
+
+// });

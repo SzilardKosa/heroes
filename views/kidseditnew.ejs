@@ -18,8 +18,24 @@
       <div class="col-md-6">
         <!-- Add picture -->
         <div class="form-group">
-          <img class="img-thumbnail" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-          <input type="file" name="profile" class="form-control-file border">
+          <img class="img-thumbnail" id="preview" src="
+          <% if (typeof kid === 'undefined') { %>
+            http://ssl.gstatic.com/accounts/ui/avatar_2x.png
+          <% } else if (typeof kid.profile === 'undefined') { %>
+            http://ssl.gstatic.com/accounts/ui/avatar_2x.png
+          <% } else { %>
+            http://localhost:3000/images/<%= kid.profile %>
+          <% } %>">
+          <input type="file" name="profile" accept="image/*" class="form-control-file border" onchange="loadFile(event)">
+          <script>
+            var loadFile = function(event) {
+              var output = document.getElementById('preview');
+              output.src = URL.createObjectURL(event.target.files[0]);
+              output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+              }
+            };
+          </script>
         </div>
       </div>
       <div class="col-md-6">
@@ -90,7 +106,7 @@
           </div>
         </div>
         <a href="/kids" class="btn btn-secondary my-2">Cancel</a>
-        <input type="submit" href="/kids" class="btn btn-primary my-2" value="Save"/>
+        <input type="submit" class="btn btn-primary my-2" value="Save"/>
         
       </div>
     </div>

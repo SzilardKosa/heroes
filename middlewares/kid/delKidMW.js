@@ -6,6 +6,16 @@ const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        next();
+        if (typeof res.locals.kid === 'undefined') {
+            return next();
+        }
+
+        res.locals.kid.remove(err => {
+            if (err) {
+                return next(err);
+            }
+
+            return res.redirect('/kids');
+        });
     };
 };
