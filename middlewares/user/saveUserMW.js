@@ -1,13 +1,16 @@
 /**
- * Using POST params update or save a user to the database
- * If res.locals.user is there, it's an update otherwise this is a registration attempt
- * Redirects to /profile after update, to / after registration
+ * Using POST params update a user in the database
+ * Redirects to /profile after update
  */
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
+    const UserModel = requireOption(objectrepository, 'UserModel');
+
     return function (req, res, next) {
         console.log(req.body);
+        console.log(req.file);
         next();
+        // TODO: from register and savekid
     };
 };

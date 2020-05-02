@@ -10,7 +10,12 @@
 
   <div class="row">
     <!-- Picture -->
-    <img class="col-md-6 img-fluid" src="<%= kid.profile %>">
+    <img class="col-md-6 img-fluid" src="
+    <% if (typeof kid.profile === 'undefined') { %>
+      http://ssl.gstatic.com/accounts/ui/avatar_2x.png
+    <% } else { %>
+      http://localhost:3000/images/<%= kid.profile %>
+    <% } %>">
     <!-- Kid info -->
     <div class="col-md-6">
       <div class="row">
@@ -49,6 +54,7 @@
           <p><%= kid.status %></p>
         </div>
       </div>
+      <a href="/kids" class="btn btn-secondary">Back</a>
       <a href="/kids" class="btn btn-danger">Apply</a>
 
     </div>

@@ -1,0 +1,4 @@
+[] change profile data
+[] dont allow registration with name admin
+[] application crud
+[] filter kids list

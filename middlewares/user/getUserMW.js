@@ -6,18 +6,22 @@
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
+    const UserModel = requireOption(objectrepository, 'UserModel');
+
     return function (req, res, next) {
+        let userId;
+        if(req.session.currentAuthRole === 'user'){
+            userId = req.session.currentUserId;
+        } else if (req.session.currentAuthRole === 'admin') {
+            userId = req.params.userID;
+        }
+        UserModel.findOne({_id:userId}, (err, user) => {
+            if (err || !user){
+                return next(err);
+            }
 
-        res.locals.user = {
-            _id: 'userid1',
-            name: 'Toby Nonerealman',
-            email: 'toby56@gmail.com',
-            password: 'password123',
-            phone: '+36 00 000 0000',
-            universe: 'DC',
-            profile: 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'
-        };
-
-        next();
+            res.locals.user = user;
+            return next();
+        });
     };
 };

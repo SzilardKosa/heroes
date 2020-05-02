@@ -7,16 +7,18 @@ const requireOption = require('./requireOption');
 
 module.exports = function (objectrepository, viewName) {
     return function (req, res) {
-        //testing admin
-        if (typeof res.locals.authRoles !== 'undefined'){
-            if (res.locals.authRoles === "both"){
+        if (
+            typeof res.locals.doubleView !== 'undefined' &&
+            res.locals.doubleView === true
+        ){
+            if (req.session.currentAuthRole === 'admin'){
                 console.log('render: ' + 'admin' + viewName);
                 return res.render('admin'+viewName, res.locals);
             }
         }
 
-        res.render(viewName, res.locals);
         console.log('render: ' + viewName);
+        return res.render(viewName, res.locals);
     };
 
 };

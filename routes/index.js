@@ -1,6 +1,7 @@
 const authMW = require('../middlewares/auth/authMW');
-const checkLoginMW = require('../middlewares/auth/checkLoginMW');
-const handleWrongFormMW = require('../middlewares/auth/handleWrongFormMW');
+const loginMW = require('../middlewares/auth/loginMW');
+const handleAlertMW = require('../middlewares/auth/handleAlertMW');
+const registerMW = require('../middlewares/auth/registerMW');
 const logoutMW = require('../middlewares/auth/logoutMW');
 const renderMW = require('../middlewares/renderMW');
 const getKidsMW = require('../middlewares/kid/getKidsMW');
@@ -31,12 +32,15 @@ module.exports = function (app, rootDir) {
   };
 
   app.get('/',
-      handleWrongFormMW(objRepo),
+      handleAlertMW(objRepo),
       renderMW(objRepo, 'index'));
   app.post('/register',
-      saveUserMW(objRepo));
+      upload.single('profile'),
+      registerMW(objRepo),
+      renderMW(objRepo, 'index'));
   app.post('/login',
-      checkLoginMW(objRepo));
+      loginMW(objRepo),
+      renderMW(objRepo, 'index'));
   app.use('/logout',
       logoutMW(objRepo));
 
@@ -89,17 +93,16 @@ module.exports = function (app, rootDir) {
       getApplicationMW(objRepo),
       delApplicationMW(objRepo));
   
-
+  app.get('/profile/del',
+      authMW(objRepo, 'user'),
+      getUserMW(objRepo),
+      delUserMW(objRepo));
   app.use('/profile',
       authMW(objRepo, 'user'),
       getUserMW(objRepo),
       upload.single('profile'),
       saveUserMW(objRepo),
       renderMW(objRepo, 'profile'));
-  app.get('/profile/del',
-      authMW(objRepo, 'user'),
-      getUserMW(objRepo),
-      delUserMW(objRepo));
   
   app.get('/users',
       authMW(objRepo, 'admin'),

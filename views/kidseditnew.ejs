@@ -69,9 +69,13 @@
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="gender" id="<%= currentGender %>" value="<%= currentGender %>"
               <% if (typeof kid !== 'undefined') { %>
-               <% if (kid.gender === currentGender) { %>
-                checked
-               <% } %>
+                <% if (kid.gender === currentGender) { %>
+                  checked
+                <% } %>
+              <% } else { %>
+                <% if ('male' === currentGender) { %>
+                  checked
+                <% } %>
               <% } %>>
               <label class="form-check-label" for="<%= currentGender %>"><%= currentGender %></label>
             </div>
@@ -83,9 +87,13 @@
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="universe" id="<%= currentUniverse %>" value="<%= currentUniverse %>"
               <% if (typeof kid !== 'undefined') { %>
-               <% if (kid.universe === currentUniverse) { %>
-                checked
-               <% } %>
+                <% if (kid.universe === currentUniverse) { %>
+                  checked
+                <% } %>
+              <% } else { %>
+                <% if ('DC' === currentUniverse) { %>
+                  checked
+                 <% } %>
               <% } %>>
               <label class="form-check-label" for="<%= currentUniverse %>"><%= currentUniverse %></label>
             </div>

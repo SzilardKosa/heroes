@@ -16,11 +16,13 @@
       <form method="POST" action="/login">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="text" class="form-control" id="email" name="email">
+          <input type="text" class="form-control" id="email" name="loginEmail"
+            value="<%= (typeof loginEmail === 'undefined') ? '' : loginEmail %>">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
+          <input type="password" class="form-control" id="password" name="loginPassword"
+            value="<%= (typeof loginPassword === 'undefined') ? '' : loginPassword %>">
         </div>
         <input type="submit" class="btn btn-primary" value="Log in" />
       </form>
@@ -28,37 +30,53 @@
     <!-- Register -->
     <div class="col-md-7">
         <h2>Create an account</h2>
-        <form>
+        <% if (typeof regError !== 'undefined') { %>
+          <div class="alert alert-danger"><%= regError %></div>
+        <% } %>
+        <% if (typeof regSuccess !== 'undefined') { %>
+          <div class="alert alert-success"><%= regSuccess %></div>
+        <% } %>
+        <form method="POST" action="/register" enctype="multipart/form-data">
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" id="name" name="name"
+                  value="<%= (typeof name === 'undefined') ? '' : name %>">
               </div>
               <div class="form-group">
                 <label for="emailReg">Email</label>
-                <input type="text" class="form-control" id="emailReg">
+                <input type="text" class="form-control" id="emailReg" name="email"
+                  value="<%= (typeof email === 'undefined') ? '' : email %>">
               </div>
               <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" class="form-control" id="phone">
+                <input type="text" class="form-control" id="phone" name="phone"
+                  value="<%= (typeof phone === 'undefined') ? '' : phone %>">
               </div>
               <div class="form-group">
                 <label for="passwordReg">Password</label>
-                <input type="password" class="form-control" id="passwordReg">
-              </div>
-              <div class="form-group">
-                <label for="passwordReg2">Confirm Password</label>
-                <input type="password" class="form-control" id="passwordReg2">
+                <input type="password" class="form-control" id="passwordReg" name="password"
+                  value="<%= (typeof password === 'undefined') ? '' : password %>">
               </div>
               <div class="form-group">
                 <label class="mr-4">Universe</label>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="DC">
+                  <input class="form-check-input" type="radio" name="universe" id="inlineRadio1" value="DC"
+                  <% if (typeof universe === 'undefined') { %>
+                    checked
+                  <% } else if (universe === 'DC') { %>
+                    checked
+                  <% } %>>
                   <label class="form-check-label" for="inlineRadio1">DC</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Marvel">
+                  <input class="form-check-input" type="radio" name="universe" id="inlineRadio2" value="Marvel"
+                  <% if (typeof universe !== 'undefined') { %>
+                    <% if (universe === 'Marvel') { %>
+                      checked
+                    <% } %>
+                  <% } %>>
                   <label class="form-check-label" for="inlineRadio2">Marvel</label>
                 </div>
               </div>
@@ -66,12 +84,21 @@
             <div class="col-lg-6">
                 <!-- Add picture -->
                 <div class="form-group">
-                  <img class="img-thumbnail" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                  <input type="file" class="form-control-file border">
+                  <img class="img-thumbnail" id="preview" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                  <input type="file" name="profile" accept="image/*" class="form-control-file border" onchange="loadFile(event)">
+                  <script>
+                    var loadFile = function(event) {
+                      var output = document.getElementById('preview');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
                 </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary mt-2">Register</button>
+          <input type="submit" class="btn btn-primary mt-2" value="Register" />
         </form>
     </div>
   </div>

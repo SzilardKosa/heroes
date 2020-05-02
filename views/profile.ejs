@@ -12,8 +12,22 @@
       <div class="col-md-6">
         <!-- Add picture -->
         <div class="form-group">
-          <img class="img-thumbnail" src="<%= user.profile %>">
-          <input type="file" name="profile" class="form-control-file border">
+          <img class="img-thumbnail" id="preview" src="
+          <% if (typeof user.profile === 'undefined') { %>
+            http://ssl.gstatic.com/accounts/ui/avatar_2x.png
+          <% } else { %>
+            http://localhost:3000/images/<%= user.profile %>
+          <% } %>">
+          <input type="file" name="profile" accept="image/*" class="form-control-file border" onchange="loadFile(event)">
+          <script>
+            var loadFile = function(event) {
+              var output = document.getElementById('preview');
+              output.src = URL.createObjectURL(event.target.files[0]);
+              output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+              }
+            };
+          </script>
         </div>
       </div>
       <div class="col-md-6">
@@ -48,7 +62,7 @@
           <% }) %>
         </div>
         <input type="submit" class="btn btn-primary mt-2" value="Save changes"/>
-        <a href="/" class="btn btn-danger mt-2">Delete Profile</a>
+        <a href="/profile/del" class="btn btn-danger mt-2">Delete Profile</a>
       </div>
     </div>
   </form>

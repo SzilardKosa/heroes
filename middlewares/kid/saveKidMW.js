@@ -30,7 +30,7 @@ module.exports = function (objectrepository) {
         res.locals.kid.gender = req.body.gender;
         res.locals.kid.universe = req.body.universe;
         res.locals.kid.abilities = req.body.abilities;
-        if (typeof req.file.filename !== 'undefined'){
+        if (typeof req.file !== 'undefined'){
             res.locals.kid.profile = req.file.filename;
         }
 
