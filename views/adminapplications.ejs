@@ -22,15 +22,23 @@
           <% applications.forEach(application => { %>
             <tr>
               <td><%= application._id %> </td>
-              <td><%= application.kidId %> </td>
-              <td><%= application.kidName %> </td>
-              <td><%= application.userId %> </td>
-              <td><%= application.userName %> </td>
+              <td><%= application._kid.id %> </td>
+              <td><%= application._kid.name %> </td>
+              <td><%= application._user.id %> </td>
+              <td><%= application._user.name %> </td>
               <td><%= application.status %> </td>
               <td style="width:30px;white-space: nowrap">
-                <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i></a>
-                <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-times-circle"></i></a>
-                <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                <div class="d-flex flex-row">
+                  <form method="POST" action="/applications/edit/<%= application._id %> ">
+                    <input type="hidden" name="status" value="approved">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i></button>
+                  </form>
+                  <form class="mx-1" method="POST" action="/applications/edit/<%= application._id %> ">
+                    <input type="hidden" name="status" value="denied">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-times-circle"></i></button>
+                  </form>
+                  <a href="/applications/del/<%= application._id %> " class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                </div>
               </td>
             </tr>
           <% }) %>

@@ -6,6 +6,16 @@ const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        next();
+        if (typeof res.locals.application === 'undefined') {
+            return next();
+        }
+
+        res.locals.application.remove(err => {
+            if (err) {
+                return next(err);
+            }
+
+            return res.redirect('/applications');
+        });
     };
 };

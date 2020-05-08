@@ -1,24 +1,29 @@
 <div class="row">
   <div class="col-12">
-    <form class="form-inline mt-2">
+    <form method="GET" class="form-inline mt-2">
       <label class="mr-4">Filter options: </label>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="DC" checked>
-        <label class="form-check-label" for="inlineCheckbox1">DC</label>
+        <input class="form-check-input" type="radio" id="All" value="All" name="universe"
+        <% if (typeof universe === 'undefined') { %>
+          checked
+        <% }%>>
+        <label class="form-check-label" for="All">All</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Marvel" checked>
-        <label class="form-check-label" for="inlineCheckbox2">Marvel</label>
+        <input class="form-check-input" type="radio" id="DC" value="DC" name="universe"
+        <% if (typeof universe !== 'undefined' && universe === 'DC') { %>
+          checked
+        <% } %>>
+        <label class="form-check-label" for="DC">DC</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Free" checked>
-        <label class="form-check-label" for="inlineCheckbox3">Free</label>
+        <input class="form-check-input" type="radio" id="Marvel" value="Marvel" name="universe"
+        <% if (typeof universe !== 'undefined' && universe === 'Marvel') { %>
+          checked
+        <% } %>>
+        <label class="form-check-label" for="Marvel">Marvel</label>
       </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Taken" checked>
-        <label class="form-check-label" for="inlineCheckbox4">Taken</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Filter</button>
+      <input type="submit" class="btn btn-primary" value="Filter"/>
     </form>
   </div>
 </div>

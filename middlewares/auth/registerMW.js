@@ -29,7 +29,7 @@ module.exports = function (objectrepository) {
                 return next(err);
             }
             // if the email isn't taken yet then save new user
-            if(!user){
+            if(!user && req.body.email !== 'admin'){
                 res.locals.user = new UserModel();
         
                 res.locals.user.name = req.body.name;

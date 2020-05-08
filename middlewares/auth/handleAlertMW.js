@@ -8,6 +8,9 @@ module.exports = function (objectrepository) {
         if (typeof req.query['reg-success'] !== 'undefined'){
             res.locals.regSuccess = req.query['reg-success']
         }
+        if (typeof req.query['app-error'] !== 'undefined'){
+            res.locals.appError = req.query['app-error']
+        }
         next();
     };
 };

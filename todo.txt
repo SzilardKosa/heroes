@@ -1,4 +1,6 @@
-[] change profile data
-[] dont allow registration with name admin
-[] application crud
-[] filter kids list
+[x] dont allow registration with name admin
+[x] change profile data: universe change not allowed, email change must be checked
+[x] filter kids list: only univers filter is implemented
+[x] application crud
+[x] filter applications by universe, and dont allow double applications
+[x] approve deny applications

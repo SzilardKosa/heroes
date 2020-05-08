@@ -11,6 +11,7 @@ const delKidMW = require('../middlewares/kid/delKidMW');
 const getApplicationsMW = require('../middlewares/application/getApplicationsMW');
 const getApplicationMW = require('../middlewares/application/getApplicationMW');
 const saveApplicationMW = require('../middlewares/application/saveApplicationMW');
+const updateApplicationMW = require('../middlewares/application/updateApplicationMW');
 const delApplicationMW = require('../middlewares/application/delApplicationMW');
 const getUsersMW = require('../middlewares/user/getUsersMW');
 const getUserMW = require('../middlewares/user/getUserMW');
@@ -55,6 +56,7 @@ module.exports = function (app, rootDir) {
   
   app.get('/kids',
       authMW(objRepo, 'both'),
+      handleAlertMW(objRepo),
       getKidsMW(objRepo),
       renderMW(objRepo, 'kidslist'));
   app.get('/kids/details/:kidID',
@@ -81,13 +83,15 @@ module.exports = function (app, rootDir) {
       authMW(objRepo, 'both'),
       getApplicationsMW(objRepo),
       renderMW(objRepo, 'applications'));
-  app.post('/applications/new',
+  app.get('/applications/new/:kidID',
       authMW(objRepo, 'user'),
+      getUserMW(objRepo),
+      getKidMW(objRepo),
       saveApplicationMW(objRepo));
   app.post('/applications/edit/:appID',
       authMW(objRepo, 'admin'),
       getApplicationMW(objRepo),
-      saveApplicationMW(objRepo));
+      updateApplicationMW(objRepo));
   app.get('/applications/del/:appID',
       authMW(objRepo, 'both'),
       getApplicationMW(objRepo),
@@ -97,7 +101,11 @@ module.exports = function (app, rootDir) {
       authMW(objRepo, 'user'),
       getUserMW(objRepo),
       delUserMW(objRepo));
-  app.use('/profile',
+  app.get('/profile',
+      authMW(objRepo, 'user'),
+      getUserMW(objRepo),
+      renderMW(objRepo, 'profile'));
+  app.post('/profile',
       authMW(objRepo, 'user'),
       getUserMW(objRepo),
       upload.single('profile'),

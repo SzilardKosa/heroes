@@ -9,10 +9,14 @@ module.exports = function (objectrepository) {
     const KidModel = requireOption(objectrepository, 'KidModel');
 
     return function (req, res, next) {
+        let query = {};
 
-        // TODO: Check for filters
+        if( typeof req.query.universe !== 'undefined' && req.query.universe !== 'All'){
+            query = { universe: req.query.universe};
+            res.locals.universe = req.query.universe;
+        }
 
-        KidModel.find({}, (err, kids) => {
+        KidModel.find(query, (err, kids) => {
             if (err){
                 return next(err);
             }
