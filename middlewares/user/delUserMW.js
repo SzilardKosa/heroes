@@ -9,7 +9,6 @@ module.exports = function (objectrepository) {
         if (typeof res.locals.user === 'undefined') {
             return next();
         }
-        console.log(res.locals.user);
         
         res.locals.user.remove(err => {
             if (err) {

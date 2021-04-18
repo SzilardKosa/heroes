@@ -11,7 +11,12 @@ module.exports = function (objectrepository) {
         // Check if they are from the same universe
         if(res.locals.user.universe !== res.locals.kid.universe){
             return res.redirect('/kids?app-error='+
-            encodeURIComponent('You have to choose from the same universe!'));
+            encodeURIComponent('You have to choose from your own universe!'));
+        }
+        // Check if the kid is free
+        if(res.locals.kid.status !== 'Free'){
+            return res.redirect('/kids?app-error='+
+            encodeURIComponent('This kid is not free anymore!'));
         }
         // Deny application for the same kid, by the same user
         ApplicationModel.findOne(

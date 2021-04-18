@@ -20,7 +20,6 @@ module.exports = function (objectrepository) {
             if (err) {
                 return next(err);
             }
-            console.log(applications);
 
             res.locals.applications = applications;
             return next();

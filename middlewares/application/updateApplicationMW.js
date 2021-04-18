@@ -5,6 +5,7 @@
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
+    const KidModel = requireOption(objectrepository, 'KidModel');
 
     return function (req, res, next) {
         if (typeof req.body.status === 'undefined') {
@@ -16,8 +17,18 @@ module.exports = function (objectrepository) {
             if (err) {
                 return next(err);
             }
-
-            return res.redirect('/applications');
+            // if it was approved set kid status to taken
+            if (req.body.status === 'approved'){
+                KidModel.updateOne({_id:res.locals.application._kid}, {status: 'Taken'}, {}, (err) => {
+                    if (err) {
+                        return next(err);
+                    }
+                    return res.redirect('/applications');
+                });
+            }
+            else {
+                return res.redirect('/applications');
+            }            
         });
     };
 };

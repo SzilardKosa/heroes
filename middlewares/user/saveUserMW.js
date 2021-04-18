@@ -8,8 +8,6 @@ module.exports = function (objectrepository) {
     const UserModel = requireOption(objectrepository, 'UserModel');
 
     return function (req, res, next) {
-        console.log(req.body);
-        console.log(req.file);
         if (
             typeof req.body.name === 'undefined' || req.body.name === '' ||
             typeof req.body.email === 'undefined' || req.body.email === '' ||
